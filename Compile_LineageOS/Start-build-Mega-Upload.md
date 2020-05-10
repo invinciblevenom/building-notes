@@ -1,8 +1,8 @@
-# Compile Lineage OS
+# Compile LineageOS
 
 **Initial phase: install git and repo tools**
 
-0. Check for updates, always.
+0. Check for updates
 
         sudo apt-get update && sudo apt-get upgrade
 
@@ -14,7 +14,7 @@
 
         mkdir ~/bin
 
-3. Set path to use repo tool anywhere (i.e., repo can be used universally)
+3. Set path to use repo tool
 
         PATH=~/bin:$PATH
 
@@ -32,33 +32,33 @@
 
         sudo apt-get install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline6-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
 
-7. Make a working directory aka, you will store Android source code here and compiling takes place in this dir. You can give any name for the dir. Using ROM name with its version is easy and convinent.
+7. Make a working directory 
 
-        mkdir working_directory
+        mkdir lineage
 
-8. cd into the working directory.
+8. Switch to working directory.
 
-        cd working_directory
+        cd lineage
 
-9. Input Git username or simply enter random value
+9. Input Git username
 
-        git config --global user.name "Your Git UserName here"
+        git config --global user.name "Ansh Singh"
 
-10. Input Git Mail or simply enter random one
+10. Input Git Email
 
-        git config --global user.email "Your Git Mail address"
+        git config --global user.email "anshsingh.14.lko@gmail.com"
 
 11. Initialise repo.
 
-        repo init -u git://github.com/LineageOS/android.git -b lineage-16.0
+        repo init -u git://github.com/LineageOS/android.git -b lineage-16.0 --depth=1
 
-12. Get nproc value
+12. Use nproc command to know no. of CPUs you have
 
         nproc (get "n" from here)
 
-13. Use the above ```nproc``` vaue to sync source code using multiple threads. This takes lot of time, depends on the nproc value and Internet Speed.
+13. Use the above ```nproc``` vaue to sync source code
 
-        repo sync -j(nproc) --force-sync
+        repo sync -c -j(nproc) --force-sync --no-clone-bundle --no-tags
 
 **Third phase: Setting ccache and Jack**
 
@@ -68,23 +68,23 @@ __a. ccache in Android 9 and below__
 
         export USE_CCACHE=1
 
-15. Input the storage yu want to use for ccache. Here I used 50G (means 50 GB). If you build for multile devices then this is enough, but for 1 device you can use 25GB and this storage is permanent.
+15. Configure how much drive space ccache can use
 
-        prebuilts/misc/linux-x86/ccache/ccache -M 50G
+        prebuilts/misc/linux-x86/ccache/ccache -M 30G
         
         export CCACHE_COMPRESS=1
         
 __b. ccache in Android 10__
 
-        export USE_CCACHE=1; export USE_CCACHE_EXEC=$(command -v ccache); ccache -M 50G;
+        export USE_CCACHE=1; export USE_CCACHE_EXEC=$(command -v ccache); ccache -M 30G;
         
- where 50G is the space allocated to cache.
+ where 30G is the space allocated to cache.
         
-16. Setup Jack, use below command
+16. Setup Jack
 
         export ANDROID_JACK_VM_ARGS="-Xmx16g -Dfile.encoding=UTF-8 -XX:+TieredCompilation"
         
-Remember to replace 16 in -Xmx16g with half the value of your RAM. Eg: If I have 16GB RAM then it is -Xmx8g.
+Remember to replace 16 in -Xmx16g with atleast half of your RAM. Eg: If I have 16GB RAM then it is -Xmx8g.
 
 **Fourth phase: Start compiling**
 
@@ -92,9 +92,9 @@ Remember to replace 16 in -Xmx16g with half the value of your RAM. Eg: If I have
 
         . build/envsetup.sh
 
-18. Compile. Example *brunch lineage_CPH1859-eng*
+18. Compile (This depends upon the ROM, do check once) Ex. *brunch lineage_CPH1859-eng*
 
-        brunch ROMName_DeviceName_BuildVariant  -j(nproc)
+        brunch ROMName_codename_BuildVariant  -j(nproc)
         
 Example:
 
