@@ -58,7 +58,7 @@
 
 13. Use the above ```nproc``` vaue to sync source code
 
-        repo sync -c -j(nproc) --force-sync --no-clone-bundle --no-tags
+        repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
 
 **Third phase: Setting ccache and Jack**
 
