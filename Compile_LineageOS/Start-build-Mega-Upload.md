@@ -8,7 +8,7 @@
 
 1. Install required packages.
 
-        sudo apt-get install android-tools-adb android-tools-fastboot git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev libxml2-utils xsltproc unzip python
+        sudo apt-get install android-tools-adb android-tools-fastboot git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev libxml2-utils xsltproc unzip python megatools
 
 2. Make a directory to place repo tool.
 
@@ -50,7 +50,7 @@
 
 11. Initialise repo.
 
-        repo init -u git://github.com/LineageOS/android.git -b lineage-16.0 --depth=1
+        repo init -u git://github.com/LineageOS/android.git -b lineage-16.0
 
 12. Use nproc command to know no. of CPUs you have
 
@@ -64,21 +64,21 @@
 
 __a. ccache in Android 9 and below__
 
-14. Use CCACHE. If you want to use Ccache then execute below 3 commands. CCache is used to quicken build speed.
+14. Use CCACHE. If you want to use Ccache then execute below 3 commands.
 
         export USE_CCACHE=1
 
 15. Configure how much drive space ccache can use
 
-        prebuilts/misc/linux-x86/ccache/ccache -M 30G
+        prebuilts/misc/linux-x86/ccache/ccache -M 50G
         
         export CCACHE_COMPRESS=1
         
 __b. ccache in Android 10__
 
-        export USE_CCACHE=1; export USE_CCACHE_EXEC=$(command -v ccache); ccache -M 30G;
+        export USE_CCACHE=1; export USE_CCACHE_EXEC=$(command -v ccache); ccache -M 50G;
         
- where 30G is the space allocated to cache.
+ where 50G is the space allocated to cache.
         
 16. Setup Jack
 
@@ -92,7 +92,7 @@ Remember to replace 16 in -Xmx16g with atleast half of your RAM. Eg: If I have 1
 
         . build/envsetup.sh
 
-18. Compile (This depends upon the ROM, do check once) Ex. *brunch lineage_CPH1859-eng*
+18. Compile (This depends upon the ROM, do check once)
 
         brunch ROMName_codename_BuildVariant  -j(nproc)
         
@@ -100,17 +100,9 @@ Example:
 
         brunch lineage_CPH1859-userdebug -j8
 
-or
-
-        make bacon -j(nproc)
-
 **Fifth phase: Uploading to Mega (through terminal)**
 
-19. Install following package:
-        
-        sudo apt-get install megatools
-  
-20. Now use below command to upload file.
+19. Use below command to upload file.
         
         megaput <file> -u <username> -p <password>
 
