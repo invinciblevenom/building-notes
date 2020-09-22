@@ -50,7 +50,7 @@
 
 11. Initialise repo.
 
-        repo init -u git://github.com/LineageOS/android.git -b lineage-16.0
+        repo init -u git://github.com/LineageOS/android.git -b lineage-17.1
 
 12. Use nproc command to know no. of CPUs you have
 
@@ -74,7 +74,7 @@ __a. ccache in Android 9 and below__
         
         export CCACHE_COMPRESS=1
         
-__b. ccache in Android 10__
+__b. ccache in Android 10 and above__
 
         export USE_CCACHE=1; export USE_CCACHE_EXEC=$(command -v ccache); ccache -M 50G;
         
@@ -96,14 +96,12 @@ Remember to replace 16 in -Xmx16g with atleast half of your RAM. Eg: If I have 1
 
         brunch ROMName_codename_BuildVariant  -j(nproc)
         
-Example:
+**For Android 11** 
 
-        brunch lineage_CPH1859-userdebug -j8
-
+        m otapackage
+        
 **Fifth phase: Uploading to Mega (through terminal)**
 
 19. Use below command to upload file.
         
         megaput <file> -u <username> -p <password>
-
-**Note:** *Mega is not allowing new users (accounts made after 11/06/2018) to upload files. The memory you use for ccache is permanent (You cannot use that storage for storing files).*
