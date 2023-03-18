@@ -1,0 +1,2 @@
+# Notes For Android Building
+
